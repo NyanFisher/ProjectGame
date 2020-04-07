@@ -14,7 +14,7 @@ export default {
     methods:{
         logout() {
             this.$store.dispatch('logout_user')
-            this.$router.push('/sign-in')
+            this.$router.push('/auth')
         }
     },
     computed: {
@@ -26,10 +26,11 @@ export default {
                     {id: 1, url: '/about', title: 'About'},
                 ]
             }
-            return [
-                {id: 0, url: '/sign-in', title: 'Sign In'},
-                {id: 1, url: '/sign-up', title: 'Sign Up'},
-            ]
+            return []
+            // return [
+            //     {id: 0, url: '/sign-in', title: 'Sign In'},
+            //     {id: 1, url: '/sign-up', title: 'Sign Up'},
+            // ]
         }
     }
 }

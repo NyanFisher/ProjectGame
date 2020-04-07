@@ -10,7 +10,7 @@ const routes = [
     name: 'Home',
     component: Home,
     beforeEnter(to, from, next) {
-      store.getters.check_user ? next() : next('/sign-in')
+      store.getters.check_user ? next() : next('/auth')
     }
   },
   {
@@ -18,18 +18,13 @@ const routes = [
     name: 'About',
     component: () => import('../views/About.vue'),
     beforeEnter(to, from, next) {
-      store.getters.check_user ? next() : next('/sign-in')
+      store.getters.check_user ? next() : next('/auth')
     }
   },
   {
-    path: '/sign-in',
-    name: 'Login',
-    component: () => import('../views/Login.vue'),
-  },
-  {
-    path: '/sign-up',
-    name: 'Registration',
-    component: () => import('../views/Registration.vue'),
+    path: '/auth',
+    name: 'Authorization',
+    component: () => import('../views/Auth.vue'),
   }
 ]
 

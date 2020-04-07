@@ -1,39 +1,59 @@
 <template>
-    <form method="post">
-        <label for="email">Введите email</label>
-        <input type="email" name="email" required id="email" v-model="email">
-        <label for="password">Введите пароль</label>
-        <input type="password" name="password" required id="password" v-model="password">
-        <input type="submit" @click="on_submit" v-model="value_button">
+    <form class="form" v-on:submit.prevent="on_submit">
+        <label class="form-label visually-hidden" for="email">Введите email</label>
+        <div class="form-email-password">
+            <input class="form-input" type="email" name="email" placeholder="Введите email" required v-model.trim="email">
+            <span class="form-icon email"></span>
+        </div>
+        <p class="input-error" v-show="error_email">{{error_email}}</p>
+
+        <label class="form-label visually-hidden" for="password">Введите пароль</label>
+        <div class="form-email-password">
+            <input class="form-input" type="password" name="password"  placeholder="Введите пароль" required v-model.trim="password">
+            <span class="form-icon password"></span>
+        </div>
+        <p class="input-error" v-show="error_password">{{error_password}}</p>
+
+        <input class="form-button" type="submit" name="submit" v-model="value_button">
     </form>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import * as check from '../store/email_password'
 export default {
     name: 'SignIn',
     data () {
         return {
             email: '',
             password: '',
-            errors: [],
+            error_email: null,
+            error_password: null
         }
     },
     methods: {
         ...mapActions(['login_user', 'change_status']),
         check_form() {
-            if (!this.email) {
-                this.errors.push('Почта указана неверно. Пример: info@mail.ru')
+            if (check.check_email_or_password(this.email, 'email'))
+            {
+                console.log("hello")
+                this.error_email = null}
+            else{
+                this.error_email = 'Почта указана неверно. Пример: info@mail.ru'
+                this.email = ''
             }
-            if (!this.password) {
-                this.errors.push(`Пароль должен состоять из 6 символов. В котором будут использованны символыы латиницы,`)
+            if (this.password) 
+                this.error_password = null
+            else {
+                this.error_password = `Введите пароль`
+                this.password = ''
             }
-            if (this.errors.length) {
+            if (this.error_email || this.error_password) {
                 return false
             }
             return true
         },
-        on_submit(e) {
+        on_submit() {
             if (this.check_form()){
                 const user = {
                     email: this.email,
@@ -47,9 +67,9 @@ export default {
                     })
                     .catch(err => {
                         this.change_status(err.message)
+                        this.error_password = "Неверный пароль"
                     })
             }
-            e.preventDefault();
             return false
         }
     },
@@ -57,12 +77,56 @@ export default {
         ...mapGetters(['loading']),
         value_button(){
             if (this.loading){
-                return 'Загрузка'
+                return 'Loading...'
             }
             else{
-                return 'Войти'
+                return 'Sign In'
             }
-        }
+        },
+
     }
 }
 </script>
+
+<style>
+.form{
+    display: flex;
+    flex-direction: column;
+    padding: 20px 50px;
+}
+.form-email-password{
+    position: relative;
+    margin-bottom: 20px;
+}
+.form-input{
+    padding: 10px;
+    width: 100%;
+}
+.input-error{
+    margin-top: 0;
+    text-align: left;
+    font-size: 14px;
+    color: red
+}
+.form-icon{
+    position: absolute;
+    right: 10px;
+    padding: 21px;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
+
+.form-button {
+    padding: 10px;
+    background-color: #edbd4e;
+    border: 1px solid #e7a338;
+}
+.email{
+    background-image: url("../assets/img/email.png");
+}
+.password{
+    background-image: url("../assets/img/password.png");
+}
+</style>

@@ -1,44 +1,68 @@
 <template>
-    <form class="registration" method="post">
-        <label class="registration-label" for="email">Емаил</label>
-        <input class="registration-input" type="email" name="email" required placeholder="Введите email" v-model="email">
+    <form class="form" method="post" v-on:submit.prevent="on_submit">
+        <label class="form-label visually-hidden" for="email">Введите email</label>
+        <div class="form-email-password">
+            <input class="form-input" type="email" name="email" placeholder="Введите email" required v-model.trim="email">
+            <span class="form-icon email"></span>
+        </div>
+        <p class="input-error" v-show="error_email">{{error_email}}</p>
 
-        <label class="registration-label" for="password">Пароль</label>
-        <input class="registration-input" type="password" name="password" required placeholder="Введите пароль" v-model="password">
+        <label class="form-label visually-hidden" for="password">Введите пароль</label>
+        <div class="form-email-password">
+            <input class="form-input" type="password" name="password"  placeholder="Введите пароль" required v-model.trim="password">
+            <span class="form-icon password"></span>
+        </div>
+        <p class="input-error" v-show="error_password">{{error_password}}</p>
 
-        <label class="registration-label" for="repeat-password">Повторный пароль</label>
-        <input class="registration-input" type="password" name="repeat-password" required placeholder="Повторно введите пароль" v-model="repeat_password">
 
-        <input @click="on_submit" type="submit" v-model="value_button" name="submit">
+        <label class="form-label visually-hidden" for="password">Введите пароль</label>
+        <div class="form-email-password">
+            <input class="form-input" type="password" name="password"  placeholder="Подтвердите пароль" required v-model.trim="repeat_password">
+            <span class="form-icon password"></span>
+        </div>
+        <p class="input-error" v-show="error_repeat_password">{{error_repeat_password}}</p>
+
+        <input class="form-button" type="submit" name="submit" v-model="value_button">
     </form>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import * as check from '../store/email_password'
 
 export default {
     name: "SignUp",
     data () {
         return {
-            errors: [],
             email: '',
             password: '',
             repeat_password: '',
+            error_email: null,
+            error_password: null,
+            error_repeat_password: null,
         }
     },
     methods: {
         ...mapActions(['change_status', 'register_user']),
         check_form() {
-            if (!this.email) {
-                this.errors.push('Почта указана неверно. Пример: info@mail.ru')
+            if (check.check_email_or_password(this.email, 'email'))
+                this.error_email = null
+            else{
+                this.error_email = 'Почта указана неверно. Пример: info@mail.ru'
+                this.email = ''
+                console.log("hello")
+
             }
-            if (!this.password) {
-                this.errors.push(`Пароль должен состоять из 6 символов. В котором будут использованны символыы латиницы,`)
+            if (check.check_email_or_password(this.password, 'password')) 
+                this.error_password = null
+            else {
+                this.error_password = `Пароль должен состоять из 6 символов. В котором будут использованны символы латиницы,`
+                this.password = ''
             }
             if (this.password != this.repeat_password) {
-                this.errors.push('Пароли должны совпадать')
+                this.error_repeat_password = 'Пароли должны совпадать'
             }
-            if (this.errors.length) {
+            if (this.error_email || this.error_password || this.error_repeat_password) {
                 return false
             }
             return true

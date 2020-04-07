@@ -12,6 +12,6 @@ export default new Vuex.Store({
     User,
     common,
     scenario,
-    chat
+    chat,
   }
 })
