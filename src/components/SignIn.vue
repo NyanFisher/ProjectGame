@@ -1,5 +1,5 @@
 <template>
-    <form class="form" v-on:submit.prevent="on_submit">
+    <form class="form" method="post" v-on:submit.prevent="on_submit">
         <label class="form-label visually-hidden" for="email">Введите email</label>
         <div class="form-email-password">
             <input class="form-input" type="email" name="email" placeholder="Введите email" required v-model.trim="email">
@@ -83,7 +83,6 @@ export default {
                 return 'Sign In'
             }
         },
-
     }
 }
 </script>

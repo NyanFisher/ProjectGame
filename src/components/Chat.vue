@@ -7,9 +7,9 @@
             <p class="chat-article-p">{{item.message}}</p>
         </article>
     </div>
-    <form action="" class="chat-form">
+    <form action="" class="chat-form" v-on:submit.prevent="on_submit">
             <textarea class="chat-textarea" v-model="message"></textarea>
-            <button class="chat-button" type="submit" @click="on_submit"></button>
+            <button type="submit" :class=load></button>
     </form>
 </div>
 </template>
@@ -20,21 +20,33 @@ export default {
     name: "Chat",
     data() {
         return {
-            message: ' '
+            message: '',
+            chat_list: [],
+            hide: false
         }
     },
     computed: {
-        ...mapGetters(['get_chat_list'])
+        ...mapGetters(['get_chat_list', 'loading']),
+        load(){
+            if (this.loading){
+                return "spinner"
+            }
+            else {
+                return 'chat-button'
+            }
+        },
     },
     methods: {
         ...mapActions(['set_new_message']),
-        on_submit(e){
+        on_submit(){
+            if (!this.message)
+                return false
             const message = {
                 message: this.message,
                 datetime: Date.now()
             }
             this.set_new_message(message)
-            e.preventDefault();
+            this.message = ''
         },
         datetime(datetime_message){
             const datetime = new Date(datetime_message)
@@ -48,6 +60,28 @@ export default {
             const string_datetime_for_time = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes
             return [string_datetime_for_time, string_datetime_norm]
         },
+    },
+    mounted() {
+        setInterval(() => {
+            this.$store.dispatch('load_chat')
+            const getter_chat_list = this.$store.getters.get_chat_list
+            if (!this.chat_list){
+                this.chat_list = getter_chat_list
+                if (!this.chat_list){
+                    this.hide = true
+                }
+                else{
+                    this.hide = false
+                }
+            }
+            else if (this.chat_list.length < getter_chat_list.length){
+                this.chat_list = getter_chat_list
+                this.hide = false
+            }
+            else{
+                this.hide = true
+            }
+        },20000)
     }
 }
 </script>
@@ -62,7 +96,7 @@ export default {
     width: 100%;
     height: 500px;
     background-color: rgba(0, 0, 0, 0.5);
-    padding: 10px 20px;
+    padding: 20px 20px;
     overflow-anchor: revert;
     overflow-y: scroll;
 }
@@ -98,6 +132,9 @@ export default {
 
     background-color: #ffffff;
     border-radius: 20px;
+}
+.chat-article:first-child{
+    margin-top: 0px;
 }
 .chat-article-h3{
     margin: 0 70px 0 0;

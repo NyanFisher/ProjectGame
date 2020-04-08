@@ -14,9 +14,9 @@ const routes = [
     }
   },
   {
-    path: '/about',
-    name: 'About',
-    component: () => import('../views/About.vue'),
+    path: '/profile',
+    name: 'Profile',
+    component: () => import('../views/Profile.vue'),
     beforeEnter(to, from, next) {
       store.getters.check_user ? next() : next('/auth')
     }
@@ -25,7 +25,13 @@ const routes = [
     path: '/auth',
     name: 'Authorization',
     component: () => import('../views/Auth.vue'),
-  }
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: () => import('../views/About.vue'),
+  },
+  
 ]
 
 const router = new VueRouter({

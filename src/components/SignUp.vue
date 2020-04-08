@@ -50,8 +50,6 @@ export default {
             else{
                 this.error_email = 'Почта указана неверно. Пример: info@mail.ru'
                 this.email = ''
-                console.log("hello")
-
             }
             if (check.check_email_or_password(this.password, 'password')) 
                 this.error_password = null
@@ -67,7 +65,7 @@ export default {
             }
             return true
         },
-        on_submit(e) {
+        on_submit() {
             if (this.check_form()){
                 const user = {
                     email: this.email,
@@ -83,7 +81,6 @@ export default {
                         this.change_status(err.message)
                     })
             }
-            e.preventDefault();
             return false
         }
     },
@@ -91,10 +88,10 @@ export default {
         ...mapGetters(['loading']),
         value_button(){
             if (this.loading){
-                return 'Загрузка'
+                return 'Loading...'
             }
             else{
-                return 'Зарегистрироваться'
+                return 'Sign Up'
             }
         }
     }

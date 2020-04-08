@@ -4,6 +4,7 @@ import User from './user'
 import common from './common'
 import scenario from './scenario'
 import chat from './chat'
+import profile from './profile'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -13,5 +14,6 @@ export default new Vuex.Store({
     common,
     scenario,
     chat,
+    profile,
   }
 })

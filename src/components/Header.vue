@@ -23,14 +23,11 @@ export default {
             if(this.check_user){
                 return [
                     {id: 0, url: '/', title: 'Game'},
-                    {id: 1, url: '/about', title: 'About'},
+                    {id: 1, url: '/profile', title: 'Profile'},
+                    {id: 2, url: '/about', title: 'About'},
                 ]
             }
             return []
-            // return [
-            //     {id: 0, url: '/sign-in', title: 'Sign In'},
-            //     {id: 1, url: '/sign-up', title: 'Sign Up'},
-            // ]
         }
     }
 }

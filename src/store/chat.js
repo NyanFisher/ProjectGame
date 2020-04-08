@@ -41,10 +41,7 @@ export default {
                     getters.user.id,
                     payload.message
                 )
-
                 const message = await firebase.database().ref('chat').push(new_message)
-
-
                 commit('new_message', {
                     ...new_message,
                     id: message.key,
@@ -57,7 +54,7 @@ export default {
               commit('set_error', error.message)
               throw error
             }
-        }
+        },
     },
     mutations: {
         new_message(state, payload){
@@ -65,14 +62,13 @@ export default {
         },
         load_chat(state, payload){
             state.chat_list = payload
-        }
+        },
     },
     getters: {
         get_chat_list(state){
             const chat = []
             state.chat_list.forEach(item => {
                 const date_send = item.datetime
-                console.log(date_send, Date.now() - 2700000)
                 if (date_send  > Date.now() - 2700000){
                     chat.push(item)
                 }
