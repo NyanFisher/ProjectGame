@@ -81,6 +81,7 @@ export default {
                 })
                 commit('change_profile', data_profile)
                 commit('set_loading', false)
+                console.log('hello')
               }
               catch (error) {
                 console.log("ERROR")

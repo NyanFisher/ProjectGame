@@ -19,7 +19,8 @@ export default {
                         new Chat(
                             message.id_user,
                             message.message,
-                            message.datetime
+                            message.nickname,
+                            message.datetime,
                         ),
                     )
                 })
@@ -37,9 +38,19 @@ export default {
             commit('clear_error')
             commit('set_loading', true)
             try {
+                const profiles_in_db = await firebase.database().ref('profile').once('value')
+                const profiles = profiles_in_db.val()
+                let nickname = 'Неизвестный пользователь'
+                Object.keys(profiles).forEach(key => {
+                    const profile = profiles[key]
+                    if (profile.user_id == getters.user.id){
+                        nickname = profile.nickname
+                    }
+                })
                 const new_message = new Chat(
                     getters.user.id,
-                    payload.message
+                    payload.message,
+                    nickname
                 )
                 const message = await firebase.database().ref('chat').push(new_message)
                 commit('new_message', {
@@ -76,5 +87,4 @@ export default {
             return chat
         }
     }
-    
 }

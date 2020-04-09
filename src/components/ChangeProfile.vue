@@ -1,10 +1,10 @@
 <template>
-    <form method="post" @click.prevent="create_new_profile">
+    <form method="post" >
         <input required type="file" name="file-img" @change="on_file_selected">
         <input required type="text" name="nickname" v-model="nickname">
         <input type="text" name="first_name" v-model="first_name">
         <input type="text" name="last_name" v-model="second_name">
-        <button></button>
+        <button @click.prevent="create_new_profile">SEND</button>
     </form>
 </template>
 
@@ -15,24 +15,18 @@ export default {
     name: "ChangeProfile",
     data() {
         return {
-            selected_file: null,
+            selected_file: '',
             nickname: '',
             first_name: '',
             second_name: '',
         }
     },
     mounted() {
-        this.inputs()
     },
     computed: {
         ...mapGetters(['loading', 'get_nickname']),
     },
     methods: {
-        inputs(){
-            this.nickname = this.$store.getters.get_nickname
-            this.first_name = this.$store.getters.get_first_name
-            this.second_name = this.$store.getters.get_second_name
-        },
         on_file_selected(event){
             this.selected_file = event.target.files[0]
         },

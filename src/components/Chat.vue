@@ -2,8 +2,10 @@
 <div class='main-chat'>
     <div class="chat">
         <article v-for="item in get_chat_list" :key="item.id" class="chat-article">
-            <h3 class="chat-article-h3">{{item.name_user}}</h3>
-            <time class="chat-article-time" :datetime="datetime(item.datetime)[0]">{{datetime(item.datetime)[1]}}</time>
+            <div class="chat-usertime">
+                <h3 class="chat-article-h3">{{item.nickname}}</h3>
+                <time class="chat-article-time" :datetime="datetime(item.datetime)[0]">{{datetime(item.datetime)[1]}}</time>
+            </div>
             <p class="chat-article-p">{{item.message}}</p>
         </article>
     </div>
@@ -55,7 +57,7 @@ export default {
             const day = String(datetime.getDay()).padStart(2, '0')
             const hours = String(datetime.getHours()).padStart(2, '0')
             const minutes = String(datetime.getMinutes()).padStart(2, '0')
-            const seconds = datetime.getSeconds()
+            const seconds =  String(datetime.getSeconds()).padStart(2, '0')
             const string_datetime_norm = day + '.' + month + '.' + year + ' ' + hours + ':' + minutes + ':' + seconds 
             const string_datetime_for_time = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes
             return [string_datetime_for_time, string_datetime_norm]
@@ -108,6 +110,11 @@ export default {
     justify-content: space-around;
 
 }
+
+.chat-usertime{
+    display: flex;
+    justify-content: space-between;
+}
 .chat-textarea{
     padding: 10px;
     width: 300px;
@@ -137,8 +144,7 @@ export default {
     margin-top: 0px;
 }
 .chat-article-h3{
-    margin: 0 70px 0 0;
-    float: left;
+    margin: 0;
     font-size: 12px;
 }
 

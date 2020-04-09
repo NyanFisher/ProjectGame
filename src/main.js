@@ -33,6 +33,8 @@ new Vue({
     firebase.auth().onAuthStateChanged(user => {
       if (user){
         this.$store.dispatch('logged_user', user)
+        this.$store.dispatch('get_profile_in_db')
+        console.log()
         this.$router.push('/')
       }
       this.$store.dispatch('load_chat')

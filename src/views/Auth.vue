@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container auth">
       <div class="log-reg">
         <nav class="log-reg-nav">
             <ul class="log-reg-ul">
@@ -53,7 +53,9 @@ export default {
     align-items: center;
     justify-content: center;
 }
-
+.auth{
+    margin-top: 50px;
+}
 .deactive{
     color: #fab030;
 }

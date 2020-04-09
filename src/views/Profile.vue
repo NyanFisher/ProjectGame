@@ -3,7 +3,7 @@
         <div :class=load[1]>
             <img :src="get_img" alt="">
             <ChangeProfile v-show="!get_loading"/>
-            <button @click="swap_visible"></button>
+            <button v-show="get_loading" @click="swap_visible">SWAP</button>
         </div>        
     </div>
 </template>
@@ -27,9 +27,6 @@ export default {
                 return ['','']
             }
         },
-    },
-    mounted() {
-        this.$store.dispatch('get_profile_in_db')
     },
     methods: {
         swap_visible(){
