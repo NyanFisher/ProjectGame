@@ -75,7 +75,7 @@ export default {
                     .then(() => {
                         console.log("REG")
                         this.change_status("OK")
-                        this.$router.push('/')
+                        this.$router.push('/new-game')
                     })
                     .catch(err => {
                         this.change_status(err.message)

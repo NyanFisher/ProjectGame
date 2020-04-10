@@ -28,7 +28,7 @@ export default {
             email: '',
             password: '',
             error_email: null,
-            error_password: null
+            error_password: null,
         }
     },
     methods: {
@@ -36,7 +36,6 @@ export default {
         check_form() {
             if (check.check_email_or_password(this.email, 'email'))
             {
-                console.log("hello")
                 this.error_email = null}
             else{
                 this.error_email = 'Почта указана неверно. Пример: info@mail.ru'
@@ -63,7 +62,7 @@ export default {
                     .then(() => {
                         console.log("LOG")
                         this.change_status("OK")
-                        this.$router.push('/')
+                        this.$router.push('/new-game')
                     })
                     .catch(err => {
                         this.change_status(err.message)
@@ -77,13 +76,13 @@ export default {
         ...mapGetters(['loading']),
         value_button(){
             if (this.loading){
-                return 'Loading...'
+                return 'Loading'
             }
             else{
                 return 'Sign In'
             }
         },
-    }
+    },
 }
 </script>
 

@@ -31,5 +31,6 @@ export default {
     height: 250px;
     width: 100%;
     background-color: rgba(0,0,0, 0.5);
+    border: 2px solid #000000;
   }
 </style>

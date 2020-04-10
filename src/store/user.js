@@ -51,7 +51,6 @@ export default{
       }
     },
     logged_user({commit}, payload){
-      console.log(payload.uid)
       commit('set_user', new User(payload.uid))
     },
     logout_user({commit}){

@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import NewGame from '../views/NewGame.vue'
 import store from '../store'
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home,
+    path: '/new-game',
+    name: 'NewGame',
+    component: NewGame,
     beforeEnter(to, from, next) {
       store.getters.check_user ? next() : next('/auth')
     }

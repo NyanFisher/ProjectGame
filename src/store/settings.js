@@ -45,7 +45,7 @@ export default {
                             [1, 'andrew_sprite.png',-30, -25],
                             null, 
                             [1, 'andrew_sprite.png',-60, -25],
-                            null,
+                            'not',
                         ],
                         sprite_second: [
                             null, 

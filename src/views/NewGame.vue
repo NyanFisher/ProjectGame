@@ -10,10 +10,14 @@ import GameBack from '@/components/GameBack'
 
 
 export default {
-  name: 'Home',
+  name: 'NewGame',
   components: {
     GameBack
   },
+  mounted() {
+    if (!this.$store.getters.user_profile)
+      this.$router.push('/profile')
+  }
 }
 </script>
 

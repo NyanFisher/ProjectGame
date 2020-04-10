@@ -8,7 +8,7 @@
             </transition>
         </div>
         <li class="logout" v-if="check_user">
-            <a @click="logout">Logout</a>
+            <a @click="logout">Выйти</a>
         </li>
     </div>
 </header>
@@ -34,7 +34,6 @@ export default {
     },
     methods:{
         menu_open_or_close(){
-            console.log("click")
             this.menu = !this.menu
         },
         logout() {
@@ -44,8 +43,8 @@ export default {
         },
     },
     computed: {
-        ...mapGetters(['check_user']),
-    }
+        ...mapGetters(['check_user']), 
+    },
 }
 </script>
 
@@ -56,7 +55,7 @@ export default {
     color: #ffffff;
 }
 .menushow {
-    max-width: 250px;
+    width: max-content;
     max-height: 240px;
     padding: 5px 0;
     overflow: visible;
@@ -65,6 +64,7 @@ export default {
     list-style-type: none;
     padding: 20px 20px;
     cursor: pointer;
+    font-size: 24px;
 }
 .profile{ 
     position: relative;

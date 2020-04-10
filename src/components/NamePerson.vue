@@ -17,11 +17,15 @@ export default {
 <style>
   .name-person{
     position: inherit;
-    left: 0;
-    top: -55px;
-    padding: 10px 20px;
-    min-width: 180px;
-    height: 19px;
-    background-color: royalblue;
+    left: -2px;
+    top: -40px;
+    padding: 5px 100px 10px 20px;
+    margin: 0;
+    min-width: 300px;
+    height: 40px;
+    background-color: rgba(0,0,0, 0.5);
+    border: 2px solid #000000;
+    border-top-right-radius: 45%;
+    font-size: 30px;
   }
 </style>

@@ -1,8 +1,8 @@
 <template>
     <nav class="navigation">
         <ul class="navigation-ul">
-            <li v-for="router_link in router_links" :key='router_link.id'  @click="choice_link" class="navigation-li">
-                <router-link class="icon"  :class="router_link.class" :to="router_link.url">{{router_link.title}}</router-link>
+            <li v-for="router_link in router_links" :key='router_link.id'  @click="choice_link" class="navigation-li icon" :class="router_link.class">
+                <router-link :to="router_link.url">{{router_link.title}}</router-link>
             </li>
         </ul>
     </nav> 
@@ -18,7 +18,7 @@ export default {
             if(this.check_user){
                 return [
                     {id: 0, url: '/profile', title: 'Профиль', class: 'profile-icon'},
-                    {id: 1, url: '/', title: 'Новая игра', class: 'new-game-icon'},
+                    {id: 1, url: '/new-game', title: 'Новая игра', class: 'new-game-icon'},
                     {id: 2, url: '/about', title: 'Загрузить',  class: 'load-game-icon'},
                 ]
             }
@@ -56,20 +56,19 @@ export default {
     list-style-type: none;
 }
 .navigation-li{
-    padding: 10px;
-
+    padding: 10px 10px 10px 40px;
+    position: relative;
     font-size: 30px;
 }
 
 .icon{
-    position: relative;
-    padding-left:30px;
+
 }
 .profile-icon::before{
     content: '';
     position: absolute;
-    top: 3px;
-    left: -2px;
+    top: 7px;
+    left: 7px;
     padding: 14px;
     background-image: url('../assets/img/icon-profile.png');
     background-size: 100%;
@@ -81,8 +80,8 @@ export default {
 .new-game-icon::before{
     content: '';
     position: absolute;
-    top: 3px;
-    left: -2px;
+    top: 7px;
+    left: 7px;
     padding: 14px;
     background-image: url('../assets/img/new_game.png');
     background-size: 100%;
@@ -94,8 +93,8 @@ export default {
 .load-game-icon::before{
     content: '';
     position: absolute;
-    top: 3px;
-    left: -2px;
+    top: 7px;
+    left: 7px;
     padding: 14px;
     background-image: url('../assets/img/load.png');
     background-size: 100%;

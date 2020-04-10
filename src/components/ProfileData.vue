@@ -1,6 +1,6 @@
 <template>
-    <div class="profile-data" @click="show_menu">
-        <img class="avatar" :src="get_img" alt="">
+    <div class="profile-data" v-show="user" @click="show_menu">
+        <img class="avatar" :src="img" alt="">
         <p class="nickname">{{get_nickname}}</p>
     </div>
 </template>
@@ -10,7 +10,17 @@ import { mapGetters } from 'vuex'
 export default {
     name: "ProfileData",
     computed: {
-        ...mapGetters(['get_img', 'get_nickname'])
+        ...mapGetters(['get_img', 'get_nickname']),
+        user(){
+            if (!this.$store.getters.user)
+                return false
+            return true
+        },
+        img(){
+            if(!this.get_img)
+                return require('../assets/img/icon-profile.png')
+            return this.get_img
+        }
     },
     methods: {
         show_menu(){
@@ -29,8 +39,9 @@ export default {
 }
 
 .avatar{
-    padding: 6px;
-    width: 60px;
+    padding: 2px;
+    width: 55px;
+    height: 55px;
     border-radius: 30px;
     margin-right: 10px;
     margin-top: 0;

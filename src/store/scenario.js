@@ -1,6 +1,4 @@
 import settings from './settings'
-import Scenario from './scenario-help'
-import firebase from 'firebase/app'
 export default {
     name: 'scenario',
     state: {
@@ -37,7 +35,11 @@ export default {
                     }
                 }
                 else if (scene.sprite_first[state.number_text] != null){
-                    state.first_sprite = scene.sprite_first[state.number_text]
+                    if (scene.sprite_first[state.number_text] == "not")
+                        {
+                        state.first_sprite = ''}
+                    else
+                        state.first_sprite = scene.sprite_first[state.number_text]
                 }
 
                 if (state.second_sprite == '' && scene.sprite_second[state.number_text] == null)
@@ -48,7 +50,10 @@ export default {
                     }
                 }
                 else if (scene.sprite_second[state.number_text] != null){
-                    state.second_sprite = scene.sprite_second[state.number_text]
+                    if (scene.sprite_second[state.number_text] == "not")
+                        state.second_sprite = ''
+                    else
+                        state.second_sprite = scene.sprite_second[state.number_text]
                 }
 
 
@@ -60,7 +65,10 @@ export default {
                     }
                 }
                 else if (scene.sprite_third[state.number_text] != null){
-                    state.third_sprite = scene.sprite_third[state.number_text]
+                    if (scene.sprite_third[state.number_text] == "not")
+                        state.third_sprite = ''
+                    else
+                        state.third_sprite = scene.sprite_third[state.number_text]
                 }
 
 
@@ -127,22 +135,24 @@ export default {
     getters: {
         get_text(state){
             const text = run_scenario(state, "text")
-            if (text[state.number_text] != 'select'){
-                const only_text = text[state.number_text].replace(/^\(.*\)/, '')
-                
-                
-                return only_text
-            }
-            return text[state.number_text-1]
+            let only_text
+            if (text[state.number_text] != 'select')
+                only_text = text[state.number_text].replace(/^\(.*\)/, '')
+            else
+                only_text = text[state.number_text - 1].replace(/^\(.*\)/, '')
+            return only_text
         },
         get_name_person(state){
             const text = run_scenario(state, "text")
-            if (text[state.number_text] != 'select'){
-                const name_person = text[state.number_text].match(/^\((.*)\)/)
-                if (name_person) 
-                    return name_person[1]
-               return ''
-            }
+            let name_person
+            if (text[state.number_text] != 'select')
+                name_person = text[state.number_text].match(/^\((.*)\)/)
+            else
+                name_person = text[state.number_text - 1].match(/^\((.*)\)/)
+                
+            if (name_person) 
+                return name_person[1]
+            return ''
         },
         get_choice(state){
             if (state.list_choice.length != 0)
@@ -164,6 +174,8 @@ export default {
         get_first_sprite(state){
             const first_sprite = run_scenario(state, "first")
             const list_sprite = first_sprite[state.number_text]
+            if (list_sprite == 'not')
+                return ''
             if (Array.isArray(list_sprite)) {
                 return list_sprite
             }
@@ -175,6 +187,8 @@ export default {
         get_second_sprite(state){
             const second_sprite = run_scenario(state, "second")
             const list_sprite = second_sprite[state.number_text]
+            if (list_sprite == 'not')
+                return ''
             if (Array.isArray(list_sprite)) {
                 return list_sprite
             }
@@ -186,6 +200,8 @@ export default {
         get_third_sprite(state){
             const third_sprite = run_scenario(state, "third")
             const list_sprite = third_sprite[state.number_text]
+            if (list_sprite == 'not')
+                return ''
             if (Array.isArray(list_sprite)) {
                 return list_sprite
             }

@@ -1,10 +1,10 @@
 <template>
-    <div class="choices" >
+    <div class="choices" :class="{nightchoices: check}" >
         <div class="first-person" :style="{backgroundImage: get_first[0], backgroundPosition:get_first[1]}">
         </div>
         <div class="second-person" :style="{backgroundImage: get_second[0], backgroundPosition:get_second[1]}">
         </div>
-        <ul class="ul-choices">
+        <ul class="ul-choices" >
             <li class="li-choices" v-for="(item, index) in get_choice"  :key="item"> 
                 <button class="li-choices-button" @click="next_step_from_choice(index)"><span class="li-choices-span">{{index}}</span>{{item}}</button>
             </li>
@@ -43,6 +43,12 @@ export default {
                 const position =  list_spirite[2] + 'px ' + list_spirite[3] + 'px'
                 return [background, position]
             }
+        },
+        check(){
+            if (this.get_choice){
+                return true
+            }
+            return false
         }
     },
 }
@@ -50,8 +56,14 @@ export default {
 
 <style scoped>
 .choices{
-    height: 550px;
+    height: 705px;
     position: relative;
+}
+.choices:fullscreen{
+    height: 830px;
+}
+.choices:-moz-full-screen{
+    height: 830px;
 }
 
 .first-person, .second-person {
@@ -68,7 +80,7 @@ export default {
     left: 40px; 
  }
 
-.night_choices{
+.nightchoices{
     background-color: rgba(0, 0, 0, 0.65);
 }
 
