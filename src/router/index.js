@@ -10,7 +10,7 @@ const routes = [
     name: 'NewGame',
     component: NewGame,
     beforeEnter(to, from, next) {
-      store.getters.check_user ? next() : next('/auth')
+      store.getters.check_user ? next() : next('/')
     }
   },
   {
@@ -18,11 +18,11 @@ const routes = [
     name: 'Profile',
     component: () => import('../views/Profile.vue'),
     beforeEnter(to, from, next) {
-      store.getters.check_user ? next() : next('/auth')
+      store.getters.check_user ? next() : next('/')
     }
   },
   {
-    path: '/auth',
+    path: '/',
     name: 'Authorization',
     component: () => import('../views/Auth.vue'),
   },

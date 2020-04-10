@@ -38,7 +38,7 @@ export default {
         },
         logout() {
             this.$store.dispatch('logout_user')
-            this.$router.push('/auth')
+            this.$router.push('/')
             window.location.reload()
         },
     },
