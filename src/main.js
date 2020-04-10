@@ -34,7 +34,6 @@ new Vue({
       if (user){
         this.$store.dispatch('logged_user', user)
         this.$store.dispatch('get_profile_in_db')
-        this.$router.push('/')
       }
     })
   }

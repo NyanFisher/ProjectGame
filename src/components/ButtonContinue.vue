@@ -1,7 +1,7 @@
 <template>
 <div>
     <button class="button-next" v-on:click="next_step" v-on:keyup.right="next_step" v-show="show_button">
-        Next
+        Далее
     </button>
     </div>
 </template>

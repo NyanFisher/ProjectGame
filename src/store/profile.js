@@ -111,6 +111,54 @@ export default {
                 all_users.push(user)
             })
             commit('all_users', all_users)
+        },
+        async change_profile({commit, getters, state}, data_profile){
+            commit('clear_error')
+            commit('set_loading', true)
+            try {
+
+                console.log(data_profile.file)
+                let avatar = ''
+                if(data_profile.file)
+                {
+                    await firebase.storage().ref(`${data_profile.file.name}`).put(data_profile.file)
+                        .then(function(){
+                            console.log("Uploaded file")
+                    }) 
+                    avatar = await firebase.storage().ref().child(data_profile.file.name).getDownloadURL()
+                }
+                else if (state.avatar)
+                {
+                    avatar = state.avatar
+                }
+
+                const profile = new Profile(
+                    getters.user.id,
+                    data_profile.nickname,
+                    avatar,
+                    data_profile.first_name,
+                    data_profile.second_name,
+                )
+                const profiles_in_db = await firebase.database().ref('profile').once('value')
+                const profiles = profiles_in_db.val()
+                let id_profile = null
+                Object.keys(profiles).forEach(key => {
+                    const profile = profiles[key]
+                    if (profile.user_id == getters.user.id)
+                    {
+                        id_profile = key
+                    }
+                })
+                await firebase.database().ref('profile').child(id_profile).update(profile)
+                commit('change_profile', profile)
+                commit('set_loading', false)
+              }
+              catch (error) {
+                console.log("ERROR")
+                commit('set_loading', false)
+                commit('set_error', error.message)
+                throw error
+              }
         }
     },
     getters: {

@@ -66,6 +66,7 @@ export default {
                     })
                     .catch(err => {
                         this.change_status(err.message)
+                        this.password = ''
                         this.error_password = "Неверный пароль"
                     })
             }
@@ -76,10 +77,10 @@ export default {
         ...mapGetters(['loading']),
         value_button(){
             if (this.loading){
-                return 'Loading'
+                return 'Загрузка'
             }
             else{
-                return 'Sign In'
+                return 'Войти'
             }
         },
     },

@@ -19,7 +19,8 @@ export default {
                 return [
                     {id: 0, url: '/profile', title: 'Профиль', class: 'profile-icon'},
                     {id: 1, url: '/new-game', title: 'Новая игра', class: 'new-game-icon'},
-                    {id: 2, url: '/about', title: 'Загрузить',  class: 'load-game-icon'},
+                    {id: 2, url: '/load', title: 'Загрузить', class: 'load-game-icon'},
+                    {id: 3, url: '/leaderboard', title: 'Лидеры',  class: 'leaderbord-icon'},
                 ]
             }
             return []
@@ -97,6 +98,18 @@ export default {
     left: 7px;
     padding: 14px;
     background-image: url('../assets/img/load.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    content: '';
+}
+.leaderbord-icon::before{
+    content: '';
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    padding: 14px;
+    background-image: url('../assets/img/winners.png');
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;

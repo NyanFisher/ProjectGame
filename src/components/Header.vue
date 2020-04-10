@@ -56,7 +56,7 @@ export default {
 }
 .menushow {
     width: max-content;
-    max-height: 240px;
+    max-height: max-content;
     padding: 5px 0;
     overflow: visible;
 }

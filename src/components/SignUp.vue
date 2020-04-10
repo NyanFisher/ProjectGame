@@ -54,7 +54,7 @@ export default {
             if (check.check_email_or_password(this.password, 'password')) 
                 this.error_password = null
             else {
-                this.error_password = `Пароль должен состоять из 6 символов. В котором будут использованны символы латиницы,`
+                this.error_password = `Пароль должен состоять более чем из 6 символовов. В котором будут использованы символы латиницы, цифры и заглавные буквы`
                 this.password = ''
             }
             if (this.password != this.repeat_password) {
@@ -88,10 +88,10 @@ export default {
         ...mapGetters(['loading']),
         value_button(){
             if (this.loading){
-                return 'Loading...'
+                return 'Загрузка'
             }
             else{
-                return 'Sign Up'
+                return 'Зарегистрироваться'
             }
         }
     }

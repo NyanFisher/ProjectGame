@@ -4,13 +4,10 @@
         <nav class="log-reg-nav">
             <ul class="log-reg-ul">
                 <li class="log-reg-li">
-                    <h2 class="log-reg-h2" :class="{deactive:!login}" @click="swap('signin')">Sign In</h2>
+                    <h2 class="log-reg-h2" :class="{deactive:!login}" @click="swap('signin')">Войти</h2>
                 </li>
                 <li class="log-reg-li">
-                    <h2 class="log-reg-h2">or</h2>
-                </li>
-                <li class="log-reg-li">
-                    <h2 class="log-reg-h2" :class="{deactive:login}" @click="swap('signup')">Sign Up</h2>
+                    <h2 class="log-reg-h2" :class="{deactive:login}" @click="swap('signup')">Регистрация</h2>
                 </li>
             </ul>
         </nav>
@@ -37,9 +34,6 @@ export default {
         if (type =='signup' && this.login == true)
             this.login = !this.login
       }
-  },
-  computed: {
-      
   },
   components: {
     SignIn,
@@ -84,10 +78,6 @@ export default {
 .log-reg-li{
     margin-right: 10px;
     cursor: pointer;
-}
-.log-reg-li:nth-child(2){
-    font-size: 12px;
-    color: #ccc2b9;
 }
 .log-reg-h2{
     margin: 0;

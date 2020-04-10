@@ -1,7 +1,7 @@
 function check_email_or_password(value, type) {
     if (type == 'email'){
         if (value){
-            const email_user = value.match(/^[0-9a-z-.]+@[0-9a-z-]{2,}\.[a-z]{2,}$/i)
+            const email_user = value.match(/^[0-9a-z-._]+@[0-9a-z-]{2,}\.[a-z]{2,}$/i)
             if (email_user) {
                 return true
             }

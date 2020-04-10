@@ -27,9 +27,9 @@ const routes = [
     component: () => import('../views/Auth.vue'),
   },
   {
-    path: '/about',
-    name: 'About',
-    component: () => import('../views/About.vue'),
+    path: '/leaderboard',
+    name: 'Leaderboard',
+    component: () => import('../views/Leaderboard.vue'),
   },
   
 ]

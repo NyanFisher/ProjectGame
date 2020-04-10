@@ -1,10 +1,28 @@
 <template>
-    <form method="post" >
+    <form method="post" class="profile-create update">
+        <img class='avatar-profile-create' :src="get_img" alt="">
         <input required type="file" name="file-img" @change="on_file_selected">
-        <input required type="text" name="nickname" v-model="nickname">
-        <input type="text" name="first_name" v-model="first_name">
-        <input type="text" name="last_name" v-model="second_name">
-        <button @click.prevent="create_new_profile">SEND</button>
+        <div class=inputs>
+            <div class="p-profile-create nickname-profile-create">
+                <label for="nickname" class="profile-create-span">Ник:</label>
+                <input class="input-profile-update" required type="text" name="nickname" v-model="nickname">
+            </div>
+            <div class="p-profile-create"> 
+                <label for="first_name" class="profile-create-span">Ваше имя:</label>
+                <input class="input-profile-update" type="text" name="first_name" v-model="first_name">
+            </div>
+            <div class="p-profile-create">
+                <label for="last_name" class="profile-create-span">Ваша фамилия:</label>
+                <input class="input-profile-update" type="text" name="last_name" v-model="second_name">
+            </div>
+        </div>
+        <div class="buttons">
+            <button v-show="!get_nickname" @click.prevent="create_new_profile" class="button-change">Сохранить изменения</button>
+            <button v-show="get_nickname" @click.prevent="check_profile" class="button-change">Сохранить изменения</button>
+            <button v-show="get_nickname" class="button-back" @click.prevent="back" >
+                Назад
+            </button>
+        </div>
     </form>
 </template>
 
@@ -21,10 +39,8 @@ export default {
             second_name: '',
         }
     },
-    mounted() {
-    },
     computed: {
-        ...mapGetters(['loading', 'get_nickname']),
+        ...mapGetters(['loading', 'get_nickname', 'get_img']),
     },
     methods: {
         on_file_selected(event){
@@ -40,7 +56,57 @@ export default {
                 file: file_image
             }
             this.$store.dispatch('create_new_profile', data)
+        },
+        change_profile(){
+            let file_image = ''
+            if (this.selected_file)
+                file_image = this.selected_file
+            else
+                file_image = ''
+            const data = {
+                nickname: this.nickname,
+                first_name: this.first_name,
+                second_name: this.second_name,
+                file: file_image
+            }
+            this.$store.dispatch('change_profile', data)
+        },
+        back(){
+            this.$emit('back')
         }
     }
 }
 </script>
+
+<style scoped>
+.update{
+    display: flex;
+    justify-content: center;
+}
+.p-profile-create{
+    display: flex;
+    justify-content: space-between;
+}
+.input-profile-update{
+    width: 260px;
+}
+.inputs{
+    margin-top: 20px;
+}
+.buttons{
+    display: flex;
+    justify-content: flex-end;
+}
+.button-back{
+    margin-top: 20px;
+    margin-left: 20px;
+    width: max-content;
+    align-self: flex-end;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+}
+.button-back:hover{
+    background-color: burlywood;
+}
+</style>
