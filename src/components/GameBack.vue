@@ -1,11 +1,11 @@
 <template>
-    <div class="background-game" id='fullscreen'>
+    <div class="background-game" id='fullscreen' >
         <button class="fullscreen-span" @click="full"></button>
         <button class="chat-open" @click="chat_hide"></button>
         <transition name="fade">
             <Chat class="chat-in-game" @changing_text="is_writing" v-if="!get_chat_hide"/>
         </transition>
-        <img class="background-game-back" :src="background_style">
+        <div class="background-game-back" :style="{backgroundImage: kk}"></div>
         <ListChoices/>       
         <InteractionArea/>
     </div>
@@ -80,6 +80,16 @@ export default {
                 background = require('@/assets/img/' + this.get_last_background)
             }
             return background
+        },
+        kk(){
+            let background = ''
+            if (this.get_background){
+                background = "url(" + require('@/assets/img/' + this.get_background) + ")"
+            }
+            else {
+                background = "url(" + require('@/assets/img/' + this.get_last_background) + ")"
+            }
+            return background
         }
     },
      mounted: function() {
@@ -119,6 +129,9 @@ export default {
       top: 0;
       width: 100%;
       height: 100%;
+      background-size: 100%;
+    background-repeat: no-repeat;
+
       object-fit: cover;
   }
   .fullscreen-span{

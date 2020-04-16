@@ -1,3 +1,3 @@
 module.exports = {
-    publicPath: '/game/'
+    publicPath: '/kontora-13/'
 }

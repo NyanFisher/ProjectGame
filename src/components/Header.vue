@@ -53,6 +53,8 @@ export default {
     height: 60px;
     background-color: #443d3a;
     color: #ffffff;
+    position: relative;
+    z-index: 3;
 }
 .menushow {
     width: max-content;
