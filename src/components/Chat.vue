@@ -1,19 +1,19 @@
 <template>
-<div class='main-chat'>
-    <div class="chat">
-        <article v-for="item in get_chat_list" :key="item.id" class="chat-article">
-            <div class="chat-usertime">
-                <h3 class="chat-article-h3">{{item.nickname}}</h3>
-                <time class="chat-article-time" :datetime="datetime(item.datetime)[0]">{{datetime(item.datetime)[1]}}</time>
-            </div>
-            <p class="chat-article-p">{{item.message}}</p>
-        </article>
+    <div class='main-chat'>
+        <div class="chat">
+            <article v-for="item in get_chat_list" :key="item.id" class="chat-article" :class="{mymessage: is_my_message(item)}">
+                <div class="chat-usertime">
+                    <h3 class="chat-article-h3">{{item.nickname}}</h3>
+                    <time class="chat-article-time" :datetime="datetime(item.datetime)[0]">{{datetime(item.datetime)[1]}}</time>
+                </div>
+                <p class="chat-article-p">{{item.message}}</p>
+            </article>
+        </div>
+        <form class="chat-form"  v-on:keyup.enter="on_submit" v-on:submit.prevent="on_submit">
+                <textarea class="chat-textarea" v-model="message" v-on:input="is_text"></textarea>
+                <button type="submit" :class=load></button>
+        </form>
     </div>
-    <form action="" class="chat-form" v-on:submit.prevent="on_submit">
-            <textarea class="chat-textarea" v-model="message"></textarea>
-            <button type="submit" :class=load></button>
-    </form>
-</div>
 </template>
 
 <script>
@@ -23,8 +23,6 @@ export default {
     data() {
         return {
             message: '',
-            chat_list: [],
-            hide: false
         }
     },
     computed: {
@@ -49,6 +47,7 @@ export default {
             }
             this.set_new_message(message)
             this.message = ''
+            this.$emit('changing_text', this.message)
         },
         datetime(datetime_message){
             const datetime = new Date(datetime_message)
@@ -62,83 +61,111 @@ export default {
             const string_datetime_for_time = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes
             return [string_datetime_for_time, string_datetime_norm]
         },
+        is_my_message(message){
+            if (message.id_user == this.$store.getters.user.id){
+                return true
+            }
+            else {
+                return false
+            }
+        },
+        is_text(){
+            this.$emit('changing_text', this.message)
+        }
     },
-    mounted() {
-        setInterval(() => {
-            this.$store.dispatch('load_chat')
-            const getter_chat_list = this.$store.getters.get_chat_list
-            if (!this.chat_list){
-                this.chat_list = getter_chat_list
-                if (!this.chat_list){
-                    this.hide = true
-                }
-                else{
-                    this.hide = false
-                }
-            }
-            else if (this.chat_list.length < getter_chat_list.length){
-                this.chat_list = getter_chat_list
-                this.hide = false
-            }
-            else{
-                this.hide = true
-            }
-        },20000)
-    }
 }
 </script>
 
 <style scoped>
+.none-mes{
+    border-radius: 24px !important;
+    overflow: hidden;
+}
 .main-chat{
-    width: 400px;
+    width: 300px;
+    padding: 10px 0px 10px 10px;
+    background-color: #e8e8e8;
+    border-radius: 10px;
+    font-size: 14px;
+}
+.main-chat:after{
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    right: 85px;
+    top: -19px;
+    margin-top: 0px;
+    border-width: 0px 15px 20px 15px;
+    border-style: solid;
+    border-color: #e8e8e8 transparent;
+}
+.mymessage{
+    border-top-left-radius: 24px !important;
+    border-bottom-right-radius: 0 !important;
 }
 .chat{
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 500px;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 20px 20px;
+    max-height: 500px;
     overflow-anchor: revert;
     overflow-y: scroll;
 }
+
 .chat-form{
-    padding: 10px 20px;
-    background-color: darkgrey;
+    margin-top: 10px;
+    margin-right: 0px;
+    padding-right: 20px;
+    width: inherit;
+    max-height: 78px;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-around;
-
 }
-
+.spinner{
+    position: absolute;
+    top: 25%;
+    right: 30px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-color: inherit;
+}
 .chat-usertime{
     display: flex;
     justify-content: space-between;
 }
 .chat-textarea{
-    padding: 10px;
-    width: 300px;
+    padding: 17px 50px 17px 10px;
+    height: 55px;
+    width: 100%;
     resize: none;
+    border: none;
+    border-radius: 24px;
 }
 .chat-button{
-    padding: 20px;
-
-    background-image: url(/img/send_message.fa7823d3.png);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 30px;
+    width: 40px;
+    height: 40px;
+    background-image: url('../assets/img/paper-plane.png');
     background-repeat: no-repeat;
     background-size: 100%;
     background-color: inherit;
     border: none;
-
     cursor: pointer;
 }
 
 .chat-article {
-    padding: 10px 20px;
+    padding: 10px;
     margin-right: 0;
-    margin-top: 20px;
+    margin-top: 10px;
 
     background-color: #ffffff;
-    border-radius: 20px;
+    border-radius: 24px;
+    border-top-left-radius: 0;
 }
 .chat-article:first-child{
     margin-top: 0px;
@@ -153,8 +180,7 @@ export default {
 }
 
 .chat-article-p{
-    margin: 10px 0 0 ;
-    padding: 10px 0;
+    margin: 0;
     text-align: left;
 }
 </style>

@@ -37,10 +37,11 @@ export default {
             nickname: '',
             first_name: '',
             second_name: '',
+            time: 0,
         }
     },
     computed: {
-        ...mapGetters(['loading', 'get_nickname', 'get_img']),
+        ...mapGetters(['loading', 'get_nickname', 'get_img', 'get_first_name', 'get_second_name']),
     },
     methods: {
         on_file_selected(event){
@@ -74,7 +75,14 @@ export default {
         back(){
             this.$emit('back')
         }
-    }
+    },
+    mounted: function() {
+        this.$nextTick(function() {
+            this.nickname = this.get_nickname
+            this.first_name = this.get_first_name
+            this.second_name = this.get_second_name
+        })
+    },
 }
 </script>
 

@@ -4,10 +4,13 @@
             <div class="profile-create " :class=load[1]>
                 <div v-show="get_loading">
                     <img class='avatar-profile-create' :src="get_img" alt="">
-                    <div >
+                    <div>
                         <p class="p-profile-create nickname-profile-create"><span class="profile-create-span">Ник:</span>{{get_nickname}} </p>
                         <p class="p-profile-create"> <span class="profile-create-span">Ваше имя:</span>{{get_first_name}}</p>
                         <p class="p-profile-create"><span class="profile-create-span">Ваша фамилия:</span>{{get_second_name}} </p>
+                        <p class="p-profile-create"><span class="profile-create-span">Количество очков:</span>{{get_count_points}} </p>
+                        <p class="p-profile-create"><span class="profile-create-span">Количество посещений игры:</span>{{get_number_visits}} </p>
+                        <p class="p-profile-create"><span class="profile-create-span">Время в игре:</span>{{get_time_in_game}} секунд</p>
                     </div>
                 </div>
                 <button class="button-change" v-show="get_loading" @click="swap_visible">Изменить профиль</button>
@@ -27,7 +30,10 @@ export default {
         ChangeProfile
     },
     computed: {
-        ...mapGetters(['get_loading', 'get_img', 'user', 'loading', 'get_nickname', 'get_first_name', 'get_second_name']),
+        ...mapGetters(['get_loading', 'get_img', 'user', 
+        'loading', 'get_nickname', 'get_first_name', 
+        'get_second_name', 'get_count_points', 'get_time_in_game',
+        'get_number_visits']),
         load(){
             if (this.loading){
                 return ['spinner', 'visually-hidden']

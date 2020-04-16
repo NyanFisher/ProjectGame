@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+
 import LeaderboardTime from '@/components/LeaderboardTime'
 import LeaderboardPoint from '@/components/LeaderboardPoint'
 export default {
@@ -14,14 +14,13 @@ export default {
   components: {
     LeaderboardTime,
     LeaderboardPoint
-  },
-  computed: {
-    ...mapGetters(['get_all_users']),
-  },
+  },  
   methods: {
   },
-  mounted() {
-    this.$store.dispatch('set_all_users')
+  mounted: function() {
+    this.$nextTick(function() {
+      this.$store.dispatch('set_statistics_time_and_points')
+    })
   }
 }
 </script>

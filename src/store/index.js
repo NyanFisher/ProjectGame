@@ -5,6 +5,7 @@ import common from './common'
 import scenario from './scenario'
 import chat from './chat'
 import profile from './profile'
+import statistics from './statistics'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -15,5 +16,6 @@ export default new Vuex.Store({
     scenario,
     chat,
     profile,
+    statistics
   }
 })

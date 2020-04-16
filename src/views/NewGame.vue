@@ -6,17 +6,35 @@
 
 <script> 
 import GameBack from '@/components/GameBack'
-// @ is an alias to /src
 
 
 export default {
   name: 'NewGame',
-  components: {
-    GameBack
+  data: function() {
+    return {
+      start_time: Date.now(),
+    }
   },
-  mounted() {
-    if (!this.$store.getters.user_profile)
-      this.$router.push('/profile')
+  components: {
+    GameBack,
+  },
+  mounted: function() {
+    this.$nextTick(function() {
+      if (!this.$store.getters.user_profile)
+      {
+        this.$router.push('/profile')
+        return 
+      }
+      this.$store.dispatch('set_statistics_from_db')
+    })
+  },
+  destroyed: function() {
+    const statistcs = {
+      number_visits: 1,
+      time_in_game: Date.now() - this.start_time,
+      count_points: 100,
+    }
+    this.$store.dispatch('update_statistics', statistcs)
   }
 }
 </script>

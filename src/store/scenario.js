@@ -22,34 +22,40 @@ export default {
             
             if (state.number_text < scene.text.length - 1){
                 state.number_text++
-                if (scene.background_img[state.number_background_img + 1] == '' && state.last_background == ''){
+                if (!scene.background_img[state.number_background_img + 1] && state.last_background == ''){
+                    state.last_background = scene.background_img[state.number_background_img]
+                }
+                else if (scene.background_img[state.number_background_img]){
                     state.last_background = scene.background_img[state.number_background_img]
                 }
                 state.number_background_img++
                 
-                if (state.first_sprite == '' && scene.sprite_first[state.number_text] == null)
+                if (state.first_sprite == '' && !scene.sprite_first[state.number_text])
                 {
-                    if (state.number_text != 0 && scene.sprite_first[state.number_text - 1] != null)
+                    if (state.number_text != 0 && scene.sprite_first[state.number_text - 1])
                     {
                         state.first_sprite = scene.sprite_first[state.number_text - 1]
                     }
                 }
-                else if (scene.sprite_first[state.number_text] != null){
+                else if (scene.sprite_first[state.number_text]){
                     if (scene.sprite_first[state.number_text] == "not")
-                        {
-                        state.first_sprite = ''}
-                    else
+                    {
+                        state.first_sprite = ''
+                    }
+                    else{
+
                         state.first_sprite = scene.sprite_first[state.number_text]
+                    }
                 }
 
-                if (state.second_sprite == '' && scene.sprite_second[state.number_text] == null)
+                if (state.second_sprite == '' && !scene.sprite_second[state.number_text])
                 {
-                    if (state.number_text != 0 && scene.sprite_second[state.number_text - 1] != null)
+                    if (state.number_text != 0 && scene.sprite_second[state.number_text - 1])
                     {
                         state.second_sprite = scene.sprite_second[state.number_text - 1]
                     }
                 }
-                else if (scene.sprite_second[state.number_text] != null){
+                else if (scene.sprite_second[state.number_text]){
                     if (scene.sprite_second[state.number_text] == "not")
                         state.second_sprite = ''
                     else
@@ -57,14 +63,14 @@ export default {
                 }
 
 
-                if (state.third_sprite == '' && scene.sprite_third[state.number_text] == null)
+                if (state.third_sprite == '' && !scene.sprite_third[state.number_text])
                 {
-                    if (state.number_text != 0 && scene.sprite_third[state.number_text - 1] != null)
+                    if (state.number_text != 0 && scene.sprite_third[state.number_text - 1])
                     {
                         state.third_sprite = scene.sprite_third[state.number_text - 1]
                     }
                 }
-                else if (scene.sprite_third[state.number_text] != null){
+                else if (scene.sprite_third[state.number_text]){
                     if (scene.sprite_third[state.number_text] == "not")
                         state.third_sprite = ''
                     else
@@ -73,8 +79,9 @@ export default {
 
 
                 if (scene.choice != null && scene.text[state.number_text] == 'select'){
+                    state.number_choice = scene.choice[0]
                     const choices = settings.CHOICE.choices[state.number_choice]
-                    
+
                     state.list_choice = choices.text
                     state.show_button = false
                     
@@ -85,9 +92,7 @@ export default {
             if (scene.next_scene != null){
                 state.number_scene = scene.next_scene
                 state.number_text = 0
-                state.first_sprite = ''
-                state.second_sprite = ''
-                state.third_sprite = ''
+                state.number_background_img = 0
                 return
             }
             if (scene.next_chapter != null){
@@ -95,9 +100,7 @@ export default {
                 state.number_chapter = scene.next_chapter
                 state.number_scene = 0
                 state.number_text = 0
-                state.first_sprite = ''
-                state.second_sprite = ''
-                state.third_sprite = ''
+                state.number_background_img = 0
                 return
             }
 
@@ -106,13 +109,10 @@ export default {
         set_hh(state, value_choice){
             const choices = settings.CHOICE.choices[state.number_choice]
             const number_choice = choices.choice[value_choice].scene
-
             if (state.number_scene != number_choice)
             {
                 state.number_text = 0
-                state.first_sprite = ''
-                state.second_sprite = ''
-                state.third_sprite = ''
+                state.number_background_img = 0
             }
             else 
             {
@@ -164,7 +164,7 @@ export default {
         },
         get_background(state){
             const background = run_scenario(state, "background")
-            if (background != '')
+            if (background)
                 return background[state.number_background_img]
             return false
         },

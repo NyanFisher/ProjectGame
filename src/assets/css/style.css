@@ -1,3 +1,23 @@
+@font-face {
+    font-family: Roboto;
+    src: url(../fonts/Roboto-Regular.ttf);
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url(../fonts/Roboto-Bold.ttf);
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url(../fonts/Roboto-Italic.ttf);
+    font-weight: normal;
+    font-style: italic;
+}
 html {
     box-sizing: border-box;
 }
@@ -8,13 +28,17 @@ html {
     box-sizing: inherit;
 }
 
+html,
+body{
+	height: 100%;
+}
 body {
     min-width: 1000px;
     margin: 0;
     background-color: #ffffff;
 
     color: #000000;
-    font-family: 'Montserrat','Lucida Grande','Lucida Sans Unicode','Lucida Sans','Arial',sans-serif;
+    font-family: 'Roboto', 'Arial',sans-serif;
     font-size: 16px;
     line-height: 20px;
 }

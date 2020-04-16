@@ -1,6 +1,6 @@
 <template>
 <div>
-    <button class="button-next" v-on:click="next_step" v-on:keyup.right="next_step" v-show="show_button">
+    <button class="button-next" v-on:keyup.space="next_step" v-on:click="next_step" v-show="show_button" ref="next_step">
         Далее
     </button>
     </div>
@@ -10,18 +10,16 @@
 import { mapGetters, mapActions } from 'vuex'
 export default {
     name: "ButtonContinue",
-    data() {
-        return {
-            width: 20,
-            height: 20,
-            iconName: 'hel'
-        }
-    },
     computed: {
         ...mapGetters(['show_button'])
     },
     methods: {
         ...mapActions(['next_step'])
+    },
+    mounted: function () {
+        this.$nextTick(function() {
+            this.$refs.next_step.focus()
+        })
     }
 }
 </script>

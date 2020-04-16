@@ -59,6 +59,11 @@ export default {
             }
             if (this.password != this.repeat_password) {
                 this.error_repeat_password = 'Пароли должны совпадать'
+                this.password = ''
+                this.repeat_password = ''
+            }
+            else {
+                this.error_repeat_password = null
             }
             if (this.error_email || this.error_password || this.error_repeat_password) {
                 return false

@@ -13,4 +13,7 @@ export default {
 </script>
 
 <style>
+.main{
+    padding-bottom: 80px;
+}
 </style>

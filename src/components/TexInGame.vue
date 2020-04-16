@@ -19,5 +19,7 @@ export default {
 .text-in-game{
     margin: 0;
     padding: 20px;
+    font-size: 28px;
+    line-height: 30px;
 }
 </style>

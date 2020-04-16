@@ -4,6 +4,7 @@ export default {
     name: 'chat',
     state: {
         chat_list: [],
+        chat_hide: true,
     },
     actions: {
         async load_chat({commit}){
@@ -74,6 +75,9 @@ export default {
         load_chat(state, payload){
             state.chat_list = payload
         },
+        swap_hide(state, payload){
+            state.chat_hide = payload
+        }
     },
     getters: {
         get_chat_list(state){
@@ -84,7 +88,13 @@ export default {
                     chat.push(item)
                 }
             })
-            return chat
+            const sorted_chat = chat.sort(function(a, b) {
+                return a.datetime - b.datetime
+            })
+            return sorted_chat  
+        },
+        get_chat_hide(state){
+            return state.chat_hide
         }
     }
 }
