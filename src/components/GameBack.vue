@@ -5,7 +5,7 @@
         <transition name="fade">
             <Chat class="chat-in-game" @changing_text="is_writing" v-if="!get_chat_hide"/>
         </transition>
-        <img class="background-game-back" :src="background_style_l">
+        <img class="background-game-back" :src="require('../assets/img/' + background_style)">
         <ListChoices/>       
         <InteractionArea/>
     </div>
@@ -15,15 +15,13 @@ import { mapGetters } from 'vuex'
 import InteractionArea from './InteractionArea'
 import ListChoices from './ListChoices'
 import Chat from '@/components/Chat'
-
 export default {
     name: 'GameBack',
     data() {
         return {
             is_full: false,
             chat_list: 0,
-            is_write: false,
-            background_style_l: '../assets/img/chat.png'
+            is_write: false
         }
     },
     components: {
@@ -75,10 +73,10 @@ export default {
         background_style(){
             let background = ''
             if (this.get_background){
-                background = "../assets/img/" + this.get_background
+                background = this.get_background
             }
             else {
-                background = "../assets/img/" + this.get_last_background
+                background = this.get_last_background
             }
             return background
         }

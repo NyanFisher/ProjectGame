@@ -87,6 +87,7 @@ export default {
     background-color: #e8e8e8;
     border-radius: 10px;
     font-size: 14px;
+    z-index: 5;
 }
 .main-chat:after{
     content: "";
