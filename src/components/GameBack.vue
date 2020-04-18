@@ -126,7 +126,7 @@ export default {
     right: 10px;
     z-index: 2;
     border: none;
-    background-color: rgba(0, 0, 0, 0.0);
+    background-color: transparent;
     background-image: url('../assets/img/fullscreen.png');
     background-size: 100%;
     background-repeat: no-repeat;
@@ -139,7 +139,7 @@ export default {
     right: 80px;
     z-index: 2;
     border: none;
-    background-color: rgba(0, 0, 0, 0.0);
+    background-color: transparent;
     background-image: url('../assets/img/chat.png');
     background-size: 100%;
     background-repeat: no-repeat;

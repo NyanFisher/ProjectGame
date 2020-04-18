@@ -18,7 +18,7 @@
         </div>
         <div class="buttons">
             <button v-show="!get_nickname" @click.prevent="create_new_profile" class="button-change">Сохранить изменения</button>
-            <button v-show="get_nickname" @click.prevent="check_profile" class="button-change">Сохранить изменения</button>
+            <button v-show="get_nickname" @click.prevent="change_profile" class="button-change">Сохранить изменения</button>
             <button v-show="get_nickname" class="button-back" @click.prevent="back" >
                 Назад
             </button>

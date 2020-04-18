@@ -1,6 +1,6 @@
 <template>
 <div>
-    <button class="button-next" v-on:keyup.space="next_step" v-on:click="next_step" v-show="show_button" ref="next_step">
+    <button class="button-next" v-on:click="next_step" v-show="show_button" ref="next_step">
         Далее
     </button>
     </div>

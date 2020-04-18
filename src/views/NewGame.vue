@@ -26,6 +26,7 @@ export default {
         return 
       }
       this.$store.dispatch('set_statistics_from_db')
+      console.log()
     })
   },
   destroyed: function() {
