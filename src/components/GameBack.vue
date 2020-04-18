@@ -5,7 +5,7 @@
         <transition name="fade">
             <Chat class="chat-in-game" @changing_text="is_writing" v-if="!get_chat_hide"/>
         </transition>
-        <img class="background-game-back" :src="require('../assets/img/' + background_style)">
+        <img class="background-game-back" :src="background_style_l">
         <ListChoices/>       
         <InteractionArea/>
     </div>
@@ -22,7 +22,8 @@ export default {
         return {
             is_full: false,
             chat_list: 0,
-            is_write: false
+            is_write: false,
+            background_style_l: '../assets/img/chat.png'
         }
     },
     components: {
@@ -74,10 +75,10 @@ export default {
         background_style(){
             let background = ''
             if (this.get_background){
-                background = this.get_background
+                background = "../assets/img/" + this.get_background
             }
             else {
-                background = this.get_last_background
+                background = "../assets/img/" + this.get_last_background
             }
             return background
         }
