@@ -2,7 +2,7 @@
     "name": "my-game-vue",
     "version": "1.0.0",
     "description": "Heroku App",
-    "author": "nyanfisher",
+    "author": "gearmobile",
     "private": true,
     "scripts": {
         "start": "node server.js",
