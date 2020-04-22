@@ -62,7 +62,6 @@ export default {
                     .then(() => {
                         // console.log("LOG")
                         this.change_status("OK")
-                        this.$router.push('/new-game')
                     })
                     .catch(err => {
                         this.change_status(err.message)

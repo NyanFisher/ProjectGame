@@ -25,6 +25,7 @@ export default {
         this.$router.push('/profile')
         return 
       }
+      console.log('hello')
       this.$store.dispatch('set_statistics_from_db')
     })
   },
@@ -35,6 +36,7 @@ export default {
       count_points: 100,
     }
     this.$store.dispatch('update_statistics', statistcs)
+  
   }
 }
 </script>

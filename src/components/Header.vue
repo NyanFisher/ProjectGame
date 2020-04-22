@@ -7,8 +7,8 @@
                 <Navigation v-if="menu" @choice_link="menu_open_or_close" :class="{menushow: menu}"/>
             </transition>
         </div>
-        <li class="logout" v-if="check_user">
-            <a @click="logout">Выйти</a>
+        <li class="logout" @click="logout" v-if="check_user">
+            <a>Выйти</a>
         </li>
     </div>
 </header>

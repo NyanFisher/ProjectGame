@@ -80,7 +80,7 @@ export default {
                     .then(() => {
                         // console.log("REG")
                         this.change_status("OK")
-                        this.$router.push('/new-game')
+                        this.$router.push('/profile')
                     })
                     .catch(err => {
                         this.change_status(err.message)
