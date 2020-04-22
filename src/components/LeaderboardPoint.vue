@@ -2,7 +2,7 @@
     <article class="leader-point">
       <h3 class="leader-point-h3">По количеству очков</h3>
       <ul class="leader-board-ul">
-        <li class="leader-board-li" v-for="(user, index) in get_stat_points" :key="user.nickname">
+        <li class="leader-board-li" v-for="(user, index) in get_stat_points" :key="index">
           <ul class="user-ul">
             <li class="user-li">
               <span>{{index + 1}}</span>

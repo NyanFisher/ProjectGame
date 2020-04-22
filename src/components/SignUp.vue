@@ -78,7 +78,7 @@ export default {
                 }
                 this.register_user(user)
                     .then(() => {
-                        console.log("REG")
+                        // console.log("REG")
                         this.change_status("OK")
                         this.$router.push('/new-game')
                     })

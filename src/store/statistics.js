@@ -41,7 +41,7 @@ export default {
                 commit('set_loading', false)
             }
             catch (error){
-                console.log("Error load statistics")
+                // console.log("Error load statistics")
                 commit('set_error', error.message)
                 throw error
             }
@@ -72,7 +72,7 @@ export default {
                 commit('set_loading', false)
             }
             catch (error){
-                console.log("Error load statistics")
+                // console.log("Error load statistics")
                 commit('set_error', error.message)
                 throw error
             }
@@ -83,7 +83,7 @@ export default {
             try {
                 let statistics = null
                 const id_statistics = getters.get_id_statistics
-                if (getters.get_id_statistics)
+                if (id_statistics)
                 {
                     const number_visits = getters.get_number_visits + data_statistics.number_visits
                     const count_points = getters.get_count_points + data_statistics.count_points
@@ -111,7 +111,7 @@ export default {
 
             }
             catch (error) {
-                console.log("ERROR")
+                // console.log("ERROR")
                 commit('set_loading', false)
                 commit('set_error', error.message)
                 throw error
@@ -131,7 +131,7 @@ export default {
                 return b.count_time - a.count_time
             })
             state.array_stats_point = data.sort(function(a, b) {
-                return b.count_point - a.count_point
+                return b.count_points - a.count_points
             })
         }
     },

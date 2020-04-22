@@ -40,7 +40,7 @@ export default {
                 const file = data_profile.file.get('image')
                 await firebase.storage().ref(`${file.name}`).put(file)
                     .then(function(){
-                        console.log("Uploaded file")
+                        // console.log("Uploaded file")
                 }) 
                 const avatar = await firebase.storage().ref().child(file.name).getDownloadURL()
                 const profile = new Profile(
@@ -55,7 +55,7 @@ export default {
                 commit('set_loading', false)
               }
               catch (error) {
-                console.log("ERROR")
+                // console.log("ERROR")
                 commit('set_loading', false)
                 commit('set_error', error.message)
                 throw error
@@ -96,7 +96,7 @@ export default {
 
               }
               catch (error) {
-                console.log("ERROR")
+                // console.log("ERROR")
                 commit('set_loading', false)
                 commit('set_error', error.message)
                 throw error
@@ -116,14 +116,12 @@ export default {
             commit('clear_error')
             commit('set_loading', true)
             try {
-
-                console.log(data_profile.file)
                 let avatar = ''
                 if(data_profile.file)
                 {
                     await firebase.storage().ref(`${data_profile.file.name}`).put(data_profile.file)
                         .then(function(){
-                            console.log("Uploaded file")
+                            // console.log("Uploaded file")
                     }) 
                     avatar = await firebase.storage().ref().child(data_profile.file.name).getDownloadURL()
                 }
@@ -154,7 +152,7 @@ export default {
                 commit('set_loading', false)
               }
               catch (error) {
-                console.log("ERROR")
+                // console.log("ERROR")
                 commit('set_loading', false)
                 commit('set_error', error.message)
                 throw error

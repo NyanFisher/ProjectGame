@@ -60,7 +60,7 @@ export default {
                 }
                 this.login_user(user)
                     .then(() => {
-                        console.log("LOG")
+                        // console.log("LOG")
                         this.change_status("OK")
                         this.$router.push('/new-game')
                     })

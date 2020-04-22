@@ -2,7 +2,7 @@
     <article class="leader-time">
       <h3 class="leader-time-h3">По количеству времени в игре</h3>
       <ul class="leader-board-ul">
-        <li class="leader-board-li" v-for="(user, index) in get_stat_time" :key="user.nickname">
+        <li class="leader-board-li" v-for="(user, index) in get_stat_time" :key="index">
           <ul class="user-ul">
             <li class="user-li">
               <span>{{index + 1}}</span>

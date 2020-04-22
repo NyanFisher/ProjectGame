@@ -29,7 +29,7 @@ export default{
         commit('set_loading', false)
       }
       catch (error) {
-        console.log("ERROR")
+        // console.log("ERROR")
         commit('set_loading', false)
         commit('set_error', error.message)
         throw error
@@ -44,7 +44,7 @@ export default{
         commit('set_loading', false)
       }
       catch (error) {
-        console.log("ERROR")
+        // console.log("ERROR")
         commit('set_loading', false)
         commit('set_error', error.message)
         throw error

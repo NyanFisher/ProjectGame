@@ -31,6 +31,11 @@ const routes = [
     name: 'Leaderboard',
     component: () => import('../views/Leaderboard.vue'),
   },
+  {
+    path: '/load',
+    name: 'Load',
+    component: () => import('../views/Load.vue'),
+  }
   
 ]
 
