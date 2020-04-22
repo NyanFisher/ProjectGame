@@ -25,7 +25,6 @@ export default {
         this.$router.push('/profile')
         return 
       }
-      console.log('hello')
       this.$store.dispatch('set_statistics_from_db')
     })
   },
